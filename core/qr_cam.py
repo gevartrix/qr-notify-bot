@@ -32,7 +32,7 @@ def create_square(frame: Any, side: int = 240) -> np.array:
     height, width = np.size(frame, 0), np.size(frame, 1)
     image_center = (width // 2, height // 2)
 
-    if not side <= min(width, height):
+    if side > min(width, height):
         raise ValueError("Invalid length of a square. Can't be more than %d" % min(width, height))
 
     tl = (image_center[0] - (side // 2), image_center[1] - (side // 2))
@@ -250,9 +250,6 @@ def detect_inside_square(
     closing = cv2.GaussianBlur(closing, (3, 3), 0)
     edge = cv2.Canny(closing, 175, 250)
 
-    if debug:
-        cv2.imshow("Edges", edge)
-
     contours, hierarchy = cv2.findContours(edge, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     for contour in contours:
@@ -267,13 +264,16 @@ def detect_inside_square(
         rect = order_points(box)
         cv2.drawContours(frame, [box], 0, (0, 0, 255), 1)
 
-        if contains_in_area(rect, square):
-            cropped = frame[square[0][1] : square[2][1], square[0][0] : square[2][0]]
+        if not contains_in_area(rect, square):
+            continue
 
-            if debug:
-                cv2.imshow("Cropped", cropped)
+        cropped = frame[square[0][1] : square[2][1], square[0][0] : square[2][0]]
 
-            return (True, cropped)
+        if debug:
+            cv2.imshow("Edges", edge)
+            cv2.imshow("Cropped", cropped)
+
+        return (True, cropped)
 
     return (False, None)
 
@@ -329,19 +329,23 @@ async def scan_qr() -> None:
             exit(1)
 
         image = draw_bounds(frame, square, lang=args.lang)
+        cv2.imshow("Live Capture", image)
+        await asyncio.sleep(0.1)
+
         detected, cropped = detect_inside_square(
             frame, square, kernel, area_min=args.area, color_lower=args.color, debug=args.verbose
         )
 
-        if detected:
-            address = detect_qr(cropped)
+        if not detected:
+            continue
 
-            if address:
-                logger.debug('Detected: "{}"', address)
-                await notify.start(address, args.pause)
+        address = detect_qr(cropped)
 
-        cv2.imshow("Live Capture", image)
-        await asyncio.sleep(0.1)
+        if not address:
+            continue
+
+        logger.debug('Detected: "{}"', address)
+        await notify.start(address, args.pause)
 
 
 def free_all() -> None:

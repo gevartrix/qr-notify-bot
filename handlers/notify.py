@@ -46,10 +46,7 @@ async def notify_user(row: Dict[str, str]) -> None:
             .replace(".", "\.")
             .replace("-", "\-")
         )
-    except KeyError:
-        logger.exception("Got invalid query response. See below for the details")
 
-    try:
         await bot.send_message(user_id, info)
         logger.success("Order notification message has been successfully sent to user {}", user_id)
     except CantParseEntities as ex:
@@ -66,6 +63,8 @@ async def notify_user(row: Dict[str, str]) -> None:
         logger.error("Notification failed. User {}'s account has been deactivated", user_id)
     except NetworkError:
         logger.critical("Could not access https://api.telegram.org/. Check your internet connection")
+    except KeyError:
+        logger.exception("Got invalid query response. See below for the details")
 
 
 async def start(address: str, pause_success: int = 5, pause_fail: int = 1) -> None:
