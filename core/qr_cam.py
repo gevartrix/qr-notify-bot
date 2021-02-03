@@ -33,7 +33,11 @@ def create_square(frame: Any, side: int = 240) -> np.array:
     image_center = (width // 2, height // 2)
 
     if side > min(width, height):
-        raise ValueError("Invalid length of a square. Can't be more than %d" % min(width, height))
+        raise ValueError(
+            "Invalid length of a square. Can't be more than %d.\n"
+            "Web-cam connection has been aborted, the bot is still running. "
+            'Press "CTRL+C" to shutdown the bot completely' % min(width, height)
+        )
 
     tl = (image_center[0] - (side // 2), image_center[1] - (side // 2))
     tr = (image_center[0] + (side // 2), image_center[1] - (side // 2))
@@ -326,7 +330,11 @@ async def scan_qr() -> None:
         key = cv2.waitKey(1)
 
         if not ret or square is None or ((key & 0xFF) in {27, ord("Q"), ord("q")}):
-            exit(1)
+            free_all()
+            logger.info(
+                'Web-cam has been shut down, the bot is still running. Press "CTRL+C" to shutdown the bot completely'
+            )
+            return
 
         image = draw_bounds(frame, square, lang=args.lang)
         cv2.imshow("Live Capture", image)
