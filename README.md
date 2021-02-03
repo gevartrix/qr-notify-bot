@@ -58,7 +58,7 @@ Before proceeding, please ensure that all of the following conditions are met:
 - You have got a Telegram account
 - [Python 3.7 or later](https://www.python.org/downloads/) is installed on your system
 - [SAP SQL Anywhere 17](https://www.sap.com/cmp/td/sap-sql-anywhere-developer-edition-free-trial.html) and [SQL Central](https://wiki.scn.sap.com/wiki/display/SQLANY/SAP+SQL+Anywhere+Database+Client+Download) are installed on your system
-- You have basic understanding of the command line.
+- You have a basic understanding of the command line.
 
 ### Getting started
 
