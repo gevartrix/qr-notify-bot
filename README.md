@@ -11,6 +11,7 @@ A test project to showcase one of potential implementations of SAP SQL Anywhere 
     * [Main Features](#main-features)
     * [Modules Used](#modules-used)
   - [Installation](#installation)
+    * [Disclaimer](#disclaimer)
     * [Prerequisites](#prerequisites)
     * [Getting started](#getting-started)
     * [Getting Telegram-related Data](#getting-telegram-related-data)
@@ -49,6 +50,15 @@ We also tried to thoroughly document the source code, so feel free to browse it.
 ## Installation
 
 The full installation process consists of several steps involving different pieces of software. There's nothing complicated, but we'll try to go through this process step-by-step, explaining it as clearly as possible, so hopefully you'll end up with a minimal working example.
+
+### Disclaimer
+
+__This is merely an example of a possible technical integration of SAP SQL Anywhere RDMS into a Python-based project. The code of this particular sample heavily relies on [Telegram messaging app](https://telegram.org/) and its [Bot API](https://core.telegram.org/bots/api) to function properly. By proceeding, running and using the sample's code, the user becomes__
+
+- __fully responsible for adherence to [Telegram's Terms of Service](https://telegram.org/tos) as well as acceptance of [Telegram's Privacy Policy](https://telegram.org/privacy)__
+- __fully aware of the respective privacy regulations.__
+
+__This sample is also provided "as-is" without any guarantee or warranty that raised issues will be answered or addressed in future releases.__
 
 ### Prerequisites
 
