@@ -10,6 +10,7 @@ A test project to showcase one of potential implementations of SAP SQL Anywhere 
   - [Summary](#summary)
     * [Main Features](#main-features)
     * [Modules Used](#modules-used)
+    * [Learn More](#learn-more)
   - [Installation](#installation)
     * [Disclaimer](#disclaimer)
     * [Prerequisites](#prerequisites)
@@ -46,6 +47,15 @@ We also tried to thoroughly document the source code, so feel free to browse it.
 - [pyzbar](https://github.com/NaturalHistoryMuseum/pyzbar) for QR-code decoding
 - [loguru](https://github.com/Delgan/loguru) for extensive logging
 - [dotenv](https://github.com/theskumar/python-dotenv) for environment variables setup.
+
+### Learn More
+
+This project is featured and meticulously explained in several articles:
+
+- (:us:) On [Blogs.SAP.com](https://blogs.sap.com): [Chat-bots with SAP SQL Anywhere](https://blogs.sap.com/?p=1212261),
+- (:ru:) On [Habr.com](https://habr.com/): [Как автоматизировать оповещения о статусе заказов через Telegram-бота, Computer Vision и SQL Anywhere](https://habr.com/ru/company/sap/blog/539262/).
+
+It also got hosted as a sample under the official SAP Samples [repository](https://github.com/SAP-samples/sql-anywhere-telegram-bot). Main development has been moved there.
 
 ## Installation
 
